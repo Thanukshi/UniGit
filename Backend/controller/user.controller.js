@@ -184,7 +184,7 @@ exports.loginUser = async function (req, res, next) {
 exports.uploadImage = async function (req, res, next) {
   // console.log("req.file.path", req.file.path);
   try {
-    console.log("first")
+    console.log("first");
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: "UserList",
     });
@@ -208,6 +208,26 @@ exports.uploadImage = async function (req, res, next) {
       code: 500,
       success: false,
       status: "Internal Server Error",
+      message: error.message,
+    });
+  }
+};
+
+exports.getAllUser = async function (req, res, next) {
+  try {
+    const userList = await User.find();
+
+    res.status(200).json({
+      code: 200,
+      success: true,
+      status: "Success",
+      UserList: userList,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      code: 500,
+      status: "Internal Server Error",
+      Success: false,
       message: error.message,
     });
   }
