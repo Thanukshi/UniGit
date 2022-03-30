@@ -61,10 +61,9 @@ function issueJWT(user) {
   const payload = {
     sub: {
       id: user._id,
-      user_id: user.user_id,
       user_email: user.user_email,
       user_name: user.user_name,
-      user_type: user.user_type,
+      user_image: user.user_image,
     },
     iat: Date.now(),
   };
