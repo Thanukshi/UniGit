@@ -1,4 +1,5 @@
 enum NavigationItem {
+  home,
   newRepo,
   repositories,
   favourites,

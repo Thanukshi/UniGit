@@ -32,6 +32,13 @@ class NavigationDrawerWidget extends StatelessWidget {
                   children: [
                     buildMenuItem(
                       context,
+                      item: NavigationItem.home,
+                      text: 'Home',
+                      icon: Icons.home,
+                    ),
+                    const SizedBox(height: 10),
+                    buildMenuItem(
+                      context,
                       item: NavigationItem.newRepo,
                       text: 'New',
                       icon: Icons.new_label,

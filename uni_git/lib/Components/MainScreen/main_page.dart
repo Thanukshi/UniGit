@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:uni_git/model/navigation_item.dart';
 import 'package:uni_git/page/favourites_page.dart';
 import 'package:uni_git/page/followers.dart';
+import 'package:uni_git/page/home.dart';
 import 'package:uni_git/page/notifications_page.dart';
 import 'package:uni_git/page/people_page.dart';
 import 'package:uni_git/page/plugins_page.dart';
@@ -25,6 +26,8 @@ class _MainPageState extends State<MainPage> {
     final navigationItem = provider.navigationItem;
 
     switch (navigationItem) {
+      case NavigationItem.home:
+        return HomePage();
       case NavigationItem.newRepo:
         return PeoplePage();
       case NavigationItem.repositories:
