@@ -9,7 +9,7 @@ import 'package:uni_git/page/people_page.dart';
 import 'package:uni_git/page/plugins_page.dart';
 import 'package:uni_git/page/repositories.dart';
 import 'package:uni_git/page/updates_page.dart';
-import 'package:uni_git/page/workflow_page.dart';
+import 'package:uni_git/page/profile.dart';
 import 'package:uni_git/provider/navigation_provider.dart';
 
 class MainPage extends StatefulWidget {
@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
       case NavigationItem.favourites:
         return FavouritesPage();
       case NavigationItem.profile:
-        return WorkflowPage();
+        return ProfilePage();
       case NavigationItem.settings:
         return UpdatesPage();
       case NavigationItem.plugins:
