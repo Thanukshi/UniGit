@@ -2,6 +2,8 @@ const User = require("../model/user.model");
 
 const utils = require("../lib/utils");
 
+const cloudinary = require("../utils/cloudinary");
+
 exports.registerUser = async function (req, res, next) {
   const { user_email, user_name, user_password, user_cPassword } = req.body;
 
@@ -87,8 +89,6 @@ exports.registerUser = async function (req, res, next) {
           user_name,
           hash: hash,
           salt: salt,
-          user_image:
-            "https://www.vhv.rs/dpng/d/436-4363443_view-user-icon-png-font-awesome-user-circle.png",
         });
 
         const tokenObject = utils.issueJWT(newUser);
@@ -182,22 +182,24 @@ exports.loginUser = async function (req, res, next) {
 };
 
 exports.uploadImage = async function (req, res, next) {
+  // console.log("req.file.path", req.file.path);
   try {
+    console.log("first")
     const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "EmployeeList",
+      folder: "UserList",
     });
     if (req.params && req.params.id) {
-      await Employee.findByIdAndUpdate(req.params.id, {
-        employee_image: result.secure_url,
+      await User.findByIdAndUpdate(req.params.id, {
+        user_image: result.secure_url,
       });
 
-      const uploadImage = await Employee.findById(req.params.id);
+      const uploadImage = await User.findById(req.params.id);
 
       return res.status(200).json({
         code: 200,
         success: true,
         status: "OK",
-        UpdateEmployee: uploadImage,
+        UserImage: uploadImage,
         message: "Image upload successfully.",
       });
     }
