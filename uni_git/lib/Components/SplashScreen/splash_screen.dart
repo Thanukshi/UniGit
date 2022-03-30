@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uni_git/Components/HomeScreen/home_screen.dart';
-import 'package:uni_git/Components/LoginScreen/login_screen.dart';
+import 'package:uni_git/Components/MainScreen/main_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -40,13 +39,13 @@ class InitState extends State<SplashScreen> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => MainPage(),
           ));
     } else {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
+          builder: (context) => MainPage(),
         ),
       );
     }
@@ -79,3 +78,4 @@ class InitState extends State<SplashScreen> {
     );
   }
 }
+

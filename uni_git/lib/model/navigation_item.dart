@@ -1,11 +1,11 @@
-enum NavigationItems {
+enum NavigationItem {
   header,
   newRepo,
   repositories,
-  favorities,
+  favourites,
   followers,
   profile,
   settings,
-  pluggins,
+  plugins,
   notifications,
 }

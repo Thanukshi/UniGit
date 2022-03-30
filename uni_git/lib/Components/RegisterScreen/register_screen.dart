@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_git/Components/Common/common.dart';
-import 'package:uni_git/Components/HomeScreen/home_screen.dart';
 import 'package:uni_git/Components/LoginScreen/login_screen.dart';
+import 'package:uni_git/Components/MainScreen/main_page.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -284,7 +284,7 @@ class InitState extends State<RegisterScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const HomeScreen(),
+                  builder: (context) => MainPage(),
                 ));
           }
         }
