@@ -5,7 +5,7 @@ import 'package:uni_git/model/navigation_item.dart';
 import 'package:uni_git/provider/navigation_provider.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
-  static final padding = EdgeInsets.symmetric(horizontal: 20);
+  static final padding = EdgeInsets.symmetric(horizontal: 15);
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -30,7 +30,6 @@ class NavigationDrawerWidget extends StatelessWidget {
                 padding: padding,
                 child: Column(
                   children: [
-                    const SizedBox(height: 5),
                     buildMenuItem(
                       context,
                       item: NavigationItem.newRepo,
@@ -134,7 +133,6 @@ class NavigationDrawerWidget extends StatelessWidget {
       Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () => selectItem(context, NavigationItem.header),
           child: Container(
             padding: padding.add(EdgeInsets.symmetric(vertical: 40)),
             child: Row(
@@ -156,12 +154,12 @@ class NavigationDrawerWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacer(),
-                CircleAvatar(
-                  radius: 24,
-                  backgroundColor: Color.fromRGBO(30, 60, 168, 1),
-                  child: Icon(Icons.add_comment_outlined, color: Colors.white),
-                )
+                // Spacer(),
+                // CircleAvatar(
+                //   radius: 24,
+                //   backgroundColor: Color.fromRGBO(30, 60, 168, 1),
+                //   child: Icon(Icons.add_comment_outlined, color: Colors.white),
+                // )
               ],
             ),
           ),

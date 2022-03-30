@@ -1,5 +1,4 @@
 enum NavigationItem {
-  header,
   newRepo,
   repositories,
   favourites,
