@@ -1,5 +1,4 @@
 const User = require("../model/user.model");
-const Librarian = require("../model/librarian.model");
 
 const utils = require("../lib/utils");
 
@@ -84,12 +83,12 @@ exports.registerUser = async function (req, res, next) {
         const hash = saltHash.hash;
 
         const newUser = new User({
-          user_id,
           user_email,
           user_name,
           hash: hash,
           salt: salt,
-          user_type: "student",
+          user_image:
+            "https://www.vhv.rs/dpng/d/436-4363443_view-user-icon-png-font-awesome-user-circle.png",
         });
 
         const tokenObject = utils.issueJWT(newUser);

@@ -2,11 +2,6 @@ const Mongoose = require("mongoose");
 
 const UserSchema = Mongoose.Schema(
   {
-    user_id: {
-      type: String,
-      unique: true,
-      required: true,
-    },
     user_email: {
       type: String,
       trim: true,
@@ -23,7 +18,7 @@ const UserSchema = Mongoose.Schema(
     salt: {
       type: String,
     },
-    user_type: {
+    user_image: {
       type: String,
     },
   },
