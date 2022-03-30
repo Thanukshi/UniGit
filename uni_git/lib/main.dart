@@ -26,8 +26,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: const OnboardScreenOne(),
-      initialRoute:
-          initScreen == 0 || initScreen == null ? 'onboard' : 'home',
+      initialRoute: initScreen == 0 || initScreen == null ? 'onboard' : 'home',
       routes: {
         'home': (context) => const SplashScreen(),
         'onboard': (context) => const OnboardScreenOne(),

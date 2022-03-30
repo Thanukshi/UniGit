@@ -29,7 +29,7 @@ class InitState extends State<RegisterScreen> {
         child: Column(
           children: [
             Container(
-              height: 260,
+              height: 300,
               decoration: const BoxDecoration(
                 borderRadius:
                     BorderRadius.only(bottomLeft: Radius.circular(90)),
@@ -49,9 +49,9 @@ class InitState extends State<RegisterScreen> {
                       margin: const EdgeInsets.only(
                         top: 50,
                       ),
-                      child: Image.asset("assets/images/logo1.png"),
-                      height: 150,
-                      width: 150,
+                      child: Image.asset("assets/images/logo.png"),
+                      height: 180,
+                      width: 180,
                     ),
                     Container(
                       margin: const EdgeInsets.only(right: 20, top: 20),
@@ -69,36 +69,7 @@ class InitState extends State<RegisterScreen> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: 20, right: 20, top: 40),
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Colors.grey[200],
-                boxShadow: const [
-                  BoxShadow(
-                      offset: Offset(0, 10),
-                      blurRadius: 50,
-                      color: Color(0xffEEEEEE))
-                ],
-              ),
-              alignment: Alignment.center,
-              child: TextField(
-                cursorColor: const Color(0xFF276955),
-                decoration: const InputDecoration(
-                    icon: Icon(
-                      Icons.person_add,
-                      color: Color(0xFF276955),
-                    ),
-                    hintText: "Enter your student id number",
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none),
-                onChanged: (value) {
-                  userId = value;
-                },
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20, top: 50),
               padding: const EdgeInsets.only(left: 20, right: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),

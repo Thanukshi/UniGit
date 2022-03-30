@@ -54,9 +54,9 @@ class InitState extends State<LoginScreen> {
                       margin: const EdgeInsets.only(
                         top: 50,
                       ),
-                      child: Image.asset("assets/images/logo1.png"),
-                      height: 150,
-                      width: 150,
+                      child: Image.asset("assets/images/logo.png"),
+                      height: 180,
+                      width: 180,
                     ),
                     Container(
                       margin: const EdgeInsets.only(right: 20, top: 10),
@@ -73,45 +73,47 @@ class InitState extends State<LoginScreen> {
                 ),
               ),
             ),
+            // Container(
+            //   width: 600,
+            //   margin: const EdgeInsets.only(
+            //       top: 40, left: 20, bottom: 5, right: 20),
+            //   padding: const EdgeInsets.symmetric(
+            //     horizontal: 40,
+            //     vertical: 2,
+            //   ),
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(12.0),
+            //     border: Border.all(
+            //       color: const Color(0xFF276955),
+            //       width: 4,
+            //     ),
+            //   ),
+            //   child: DropdownButtonHideUnderline(
+            //     child: DropdownButton<String>(
+            //       hint: const Text(
+            //         "Select User Type",
+            //         style: TextStyle(
+            //           fontSize: 18,
+            //           fontWeight: FontWeight.bold,
+            //           color: Colors.black,
+            //         ),
+            //       ),
+            //       value: userValue,
+            //       iconSize: 36,
+            //       icon: const Icon(
+            //         Icons.arrow_drop_down,
+            //         color: Color(0xFF276955),
+            //       ),
+            //       items: userTypes.map(buildMenuItem).toList(),
+            //       onChanged: (value) => setState(
+            //         () => userValue = value,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+
             Container(
-                width: 600,
-                margin: const EdgeInsets.only(
-                    top: 40, left: 20, bottom: 5, right: 20),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 40,
-                  vertical: 2,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  border: Border.all(
-                    color: const Color(0xFF276955),
-                    width: 4,
-                  ),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    hint: const Text(
-                      "Select User Type",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    value: userValue,
-                    iconSize: 36,
-                    icon: const Icon(
-                      Icons.arrow_drop_down,
-                      color: Color(0xFF276955),
-                    ),
-                    items: userTypes.map(buildMenuItem).toList(),
-                    onChanged: (value) => setState(
-                      () => userValue = value,
-                    ),
-                  ),
-                )),
-            Container(
-              margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20, top: 50),
               padding: const EdgeInsets.only(left: 20, right: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),

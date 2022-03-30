@@ -46,7 +46,7 @@ class InitState extends State<SplashScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
+          builder: (context) => const HomeScreen(),
         ),
       );
     }
@@ -72,7 +72,7 @@ class InitState extends State<SplashScreen> {
             ),
           ),
           Center(
-            child: Image.asset("assets/images/logo1.png"),
+            child: Image.asset("assets/images/logo.png"),
           ),
         ],
       ),
