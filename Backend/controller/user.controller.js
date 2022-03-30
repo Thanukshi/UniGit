@@ -181,6 +181,36 @@ exports.loginUser = async function (req, res, next) {
   }
 };
 
+exports.uploadImage = async function (req, res, next) {
+  try {
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "EmployeeList",
+    });
+    if (req.params && req.params.id) {
+      await Employee.findByIdAndUpdate(req.params.id, {
+        employee_image: result.secure_url,
+      });
+
+      const uploadImage = await Employee.findById(req.params.id);
+
+      return res.status(200).json({
+        code: 200,
+        success: true,
+        status: "OK",
+        UpdateEmployee: uploadImage,
+        message: "Image upload successfully.",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      code: 500,
+      success: false,
+      status: "Internal Server Error",
+      message: error.message,
+    });
+  }
+};
+
 function validateEmail(email) {
   const re =
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
