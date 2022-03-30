@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_git/Components/Onboard_Screen/onboard_screen_one.dart';
 import 'package:uni_git/Components/SplashScreen/splash_screen.dart';
+import 'package:uni_git/provider/navigation_provider.dart';
 
 int? initScreen;
 Future<void> main() async {
@@ -19,18 +21,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return ChangeNotifierProvider(
+      create: (context) => NavigationProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: const OnboardScreenOne(),
+        initialRoute:
+            initScreen == 0 || initScreen == null ? 'onboard' : 'home',
+        routes: {
+          'home': (context) => const SplashScreen(),
+          'onboard': (context) => const OnboardScreenOne(),
+        },
       ),
-      home: const OnboardScreenOne(),
-      initialRoute: initScreen == 0 || initScreen == null ? 'onboard' : 'home',
-      routes: {
-        'home': (context) => const SplashScreen(),
-        'onboard': (context) => const OnboardScreenOne(),
-      },
     );
   }
 }

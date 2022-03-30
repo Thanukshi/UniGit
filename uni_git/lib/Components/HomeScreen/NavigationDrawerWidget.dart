@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:uni_git/model/navigation_items.dart';
+import 'package:uni_git/provider/navigation_provider.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   static final padding = EdgeInsets.symmetric(horizontal: 20);
@@ -23,6 +26,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                   buildMenuItem(
                     context,
+                    item: NavigationItems.newRepo,
                     text: "New",
                     icon: Icons.new_label,
                   ),
@@ -31,6 +35,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                   buildMenuItem(
                     context,
+                    item: NavigationItems.repositories,
                     text: "Repositories",
                     icon: Icons.list,
                   ),
@@ -39,6 +44,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                   buildMenuItem(
                     context,
+                    item: NavigationItems.favorities,
                     text: "Favourities",
                     icon: Icons.favorite,
                   ),
@@ -48,6 +54,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   buildMenuItem(
                     context,
                     text: "Followers",
+                    item: NavigationItems.followers,
                     icon: Icons.follow_the_signs,
                   ),
                   const SizedBox(
@@ -55,11 +62,9 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                   buildMenuItem(
                     context,
+                    item: NavigationItems.profile,
                     text: "Profile",
                     icon: Icons.person,
-                  ),
-                  const SizedBox(
-                    height: 10,
                   ),
                   const SizedBox(height: 24),
                   Divider(color: Colors.white),
@@ -68,6 +73,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                   buildMenuItem(
                     context,
+                    item: NavigationItems.settings,
                     text: "Settings",
                     icon: Icons.settings,
                   ),
@@ -76,6 +82,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                   buildMenuItem(
                     context,
+                    item: NavigationItems.pluggins,
                     text: "Pluggins",
                     icon: Icons.account_tree,
                   ),
@@ -84,6 +91,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                   buildMenuItem(
                     context,
+                    item: NavigationItems.notifications,
                     text: "Notifications",
                     icon: Icons.notifications,
                   ),
@@ -94,22 +102,31 @@ class NavigationDrawerWidget extends StatelessWidget {
         ),
       );
 
-  buildMenuItem(BuildContext context,
-      {required String text, required IconData icon}) {
+  buildMenuItem(
+    BuildContext context, {
+    required NavigationItems item,
+    required String text,
+    required IconData icon,
+  }) {
+    final provider = Provider.of<NavigationProvider>(context);
+    final currentItem = provider.navigationItems;
+    final isSelected = item == currentItem;
+
     final color = Colors.white;
     return Material(
       color: Colors.transparent,
       child: ListTile(
-        leading: Icon(
-          icon,
-          color: color,
-        ),
-        title: Text(
-          text,
-          style: TextStyle(color: color, fontSize: 18),
-        ),
-        onTap: () {},
+        selected: isSelected,
+        selectedTileColor: Colors.white24,
+        leading: Icon(icon, color: color),
+        title: Text(text, style: TextStyle(color: color, fontSize: 18)),
+        onTap: () => selectItem(context, item),
       ),
     );
+  }
+
+  void selectItem(BuildContext context, NavigationItems item) {
+    final provider = Provider.of<NavigationProvider>(context, listen: false);
+    provider.setNavigationItem(item);
   }
 }
