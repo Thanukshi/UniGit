@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_git/Components/LoginScreen/login_screen.dart';
 import 'package:uni_git/Components/MainScreen/main_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -45,7 +46,7 @@ class InitState extends State<SplashScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => MainPage(),
+          builder: (context) => const LoginScreen(),
         ),
       );
     }
@@ -78,4 +79,3 @@ class InitState extends State<SplashScreen> {
     );
   }
 }
-

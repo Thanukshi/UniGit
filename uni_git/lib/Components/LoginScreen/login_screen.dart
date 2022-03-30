@@ -180,7 +180,7 @@ class InitState extends State<LoginScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () => {loginUser(userValue!, userEmail, userPass)},
+              onTap: () => {loginUser(userEmail, userPass)},
               //{loginUser(userEmail, userPass)},
               child: Container(
                 margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
@@ -257,8 +257,7 @@ class InitState extends State<LoginScreen> {
         ),
       );
 
-  void loginUser(String userType, String email, String password) async {
-    print("user type" + userType);
+  void loginUser(String email, String password) async {
     if (email == "" || email == Null) {
       showErrorToast(
           context, "Email Error", "Email can no be empty. Please Enter Email.");
@@ -274,80 +273,35 @@ class InitState extends State<LoginScreen> {
         final String? token = prefs.getString('token');
 
         if ("{$token}" == Null || "{$token}" == '{null}') {
-          if (userType == "Student") {
-            var response = await Dio().post(CommonService.URL + "/user/login",
-                data: {
-                  "user_type": userType,
-                  "user_email": email,
-                  "user_password": password
-                });
-            print("datasss" + response.data.toString());
+          var response = await Dio().post(CommonService.URL + "/user/login",
+              data: {"user_email": email, "user_password": password});
+          print("datasss" + response.data.toString());
 
-            if (response.statusCode == 200) {
-              if (response.data['code'] == 203 &&
-                  response.data['status'] == "Non-Authoritative Information") {
-                showErrorToast(context, "Email Error",
-                    response.data["message"].toString());
-              } else if (response.data['code'] == 203 &&
-                  response.data['status'] ==
-                      "Password - Non-Authoritative Information") {
-                showErrorToast(
-                    context, "Password Error", response.data["msg"].toString());
-              } else if (response.data["code"] == 202) {
-                await prefs.setString(
-                    'token', response.data["token"].toString());
+          if (response.statusCode == 200) {
+            if (response.data['code'] == 203 &&
+                response.data['status'] == "Non-Authoritative Information") {
+              showErrorToast(
+                  context, "Email Error", response.data["message"].toString());
+            } else if (response.data['code'] == 203 &&
+                response.data['status'] ==
+                    "Password - Non-Authoritative Information") {
+              showErrorToast(
+                  context, "Password Error", response.data["msg"].toString());
+            } else if (response.data["code"] == 202) {
+              await prefs.setString('token', response.data["token"].toString());
 
-                print(response.data["token"]);
-                print("token {$token}");
+              print(response.data["token"]);
+              print("token {$token}");
 
-                // showSuccessToast(
-                //     context, "Login", "You were logged successfully.");
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MainPage(),
-                    ));
-              } else {
-                showErrorToast(context, "Error", "1Something went wrong...");
-              }
-            }
-          }
-          if (userType == "Librarian") {
-            var response = await Dio().post(CommonService.URL + "/user/login",
-                data: {
-                  "user_type": userType,
-                  "librarian_email": email,
-                  "libraian_password": password
-                });
-            print("datasss" + response.data.toString());
-
-            if (response.statusCode == 200) {
-              if (response.data['code'] == 203 &&
-                  response.data['status'] == "Non-Authoritative Information") {
-                showErrorToast(context, "Email Error",
-                    response.data["message"].toString());
-              } else if (response.data['code'] == 203 &&
-                  response.data['status'] ==
-                      "Password - Non-Authoritative Information") {
-                showErrorToast(
-                    context, "Password Error", response.data["msg"].toString());
-              } else if (response.data["code"] == 202) {
-                await prefs.setString(
-                    'token', response.data["token"].toString());
-
-                print(response.data["token"]);
-                print("token {$token}");
-
-                // showSuccessToast(
-                //     context, "Login", "You were logged successfully.");
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MainPage(),
-                    ));
-              } else {
-                showErrorToast(context, "Error", "1Something went wrong...");
-              }
+              // showSuccessToast(
+              //     context, "Login", "You were logged successfully.");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MainPage(),
+                  ));
+            } else {
+              showErrorToast(context, "Error", "1Something went wrong...");
             }
           }
         } else {

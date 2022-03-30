@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uni_git/page/Other/app_bar.dart';
 // import 'package:uni_git/page/Other/profile_page.dart';
 // import 'package:uni_git/widget/navigation_drawer_widget.dart';
 
@@ -26,7 +27,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: buildAppBar(context),
+      body: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [],
+      ),
     );
   }
 }
