@@ -4,17 +4,10 @@ const Librarian = require("../model/librarian.model");
 const utils = require("../lib/utils");
 
 exports.registerUser = async function (req, res, next) {
-  const { user_id, user_email, user_name, user_password } = req.body;
+  const { user_email, user_name, user_password, user_cPassword } = req.body;
 
   try {
-    if (!user_id) {
-      return res.status(200).json({
-        code: 204,
-        status: "No Content",
-        Success: false,
-        message: "Please enter a your id.",
-      });
-    } else if (!user_email) {
+    if (!user_email) {
       return res.status(200).json({
         code: 204,
         status: "No Content",
@@ -27,6 +20,13 @@ exports.registerUser = async function (req, res, next) {
         status: "No Content",
         Success: false,
         message: "Please enter a your user name.",
+      });
+    } else if (!user_password) {
+      return res.status(200).json({
+        code: 204,
+        status: "No Content",
+        Success: false,
+        message: "Please enter a your password.",
       });
     } else if (!validateEmail(user_email)) {
       return res.status(200).json({
@@ -43,18 +43,19 @@ exports.registerUser = async function (req, res, next) {
         message:
           "Password has 8 characters, It must have one uppercase letter, lowercase letter, number and special character.",
       });
+    } else if (user_cPassword != user_password) {
+      return res.status(200).json({
+        code: 406,
+        success: false,
+        status: "Not Acceptable",
+        message:
+          "Confirm Password does not match with the password. Please check again.",
+      });
     } else {
-      const userId = await User.findOne({ user_id });
-      if (userId) {
-        return res.status(200).json({
-          code: 208,
-          success: false,
-          status: "Student ID is Already Reported",
-          message: "This id is already exists.",
-        });
-      }
-
       const userEmail = await User.findOne({ user_email });
+
+      const userName = await User.findOne({ user_name });
+
       if (userEmail) {
         return res.status(200).json({
           code: 208,
@@ -62,34 +63,48 @@ exports.registerUser = async function (req, res, next) {
           status: "Email is Already Reported",
           message: "This email is already exists.",
         });
+      } else if (userName) {
+        return res.status(200).json({
+          code: 208,
+          success: false,
+          status: "User Name is Already Reported",
+          message: "This user name is already exists.",
+        });
+      } else if (userEmail && userName) {
+        return res.status(200).json({
+          code: 208,
+          success: false,
+          status: "Already Reported",
+          message: "This user name is already exists with this email.",
+        });
+      } else {
+        const saltHash = utils.genPassword(user_password);
+
+        const salt = saltHash.salt;
+        const hash = saltHash.hash;
+
+        const newUser = new User({
+          user_id,
+          user_email,
+          user_name,
+          hash: hash,
+          salt: salt,
+          user_type: "student",
+        });
+
+        const tokenObject = utils.issueJWT(newUser);
+        await newUser.save();
+
+        return res.status(200).json({
+          code: 201,
+          status: "Created",
+          Success: true,
+          token: tokenObject.token,
+          expiresIn: tokenObject.expires,
+          sub: tokenObject.sub,
+          UserDetails: newUser,
+        });
       }
-
-      const saltHash = utils.genPassword(user_password);
-
-      const salt = saltHash.salt;
-      const hash = saltHash.hash;
-
-      const newUser = new User({
-        user_id,
-        user_email,
-        user_name,
-        hash: hash,
-        salt: salt,
-        user_type: "student",
-      });
-
-      const tokenObject = utils.issueJWT(newUser);
-      await newUser.save();
-
-      return res.status(200).json({
-        code: 201,
-        status: "Created",
-        Success: true,
-        token: tokenObject.token,
-        expiresIn: tokenObject.expires,
-        sub: tokenObject.sub,
-        UserDetails: newUser,
-      });
     }
   } catch (error) {
     return res.status(500).json({
