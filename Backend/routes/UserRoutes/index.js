@@ -11,7 +11,9 @@ routes.post("/login", UserRoutes.loginUser);
 
 routes.put("/image/:id", upload.single("image"), UserRoutes.uploadImage);
 
-routes.get("/all_users", UserRoutes.getAllUser);
+routes.get("/users", UserRoutes.getAllUser);
+
+routes.get("/user/:id", UserRoutes.getUserDetailsByID);
 
 // routes.get("/getUser/:id", UserRoutes.getUserDetailsByID);
 

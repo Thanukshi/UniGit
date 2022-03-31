@@ -22,11 +22,6 @@ class InitState extends State<LoginScreen> {
   }
 
   Widget initWidget() {
-    // final userTypes = [
-    //   'Student',
-    //   'Librarian',
-    // ];
-
     String userEmail = '';
     String userPass = '';
     return Scaffold(
@@ -224,7 +219,7 @@ class InitState extends State<LoginScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RegisterScreen(),
+                          builder: (context) => const RegisterScreen(),
                         ),
                       ),
                     },
@@ -289,12 +284,13 @@ class InitState extends State<LoginScreen> {
                   context, "Password Error", response.data["msg"].toString());
             } else if (response.data["code"] == 202) {
               await prefs.setString('token', response.data["token"].toString());
+              await prefs.setString(
+                  'user_email', response.data["sub"]["user_email"].toString());
+              await prefs.setString(
+                  'user_name', response.data["sub"]["user_name"].toString());
+              await prefs.setString(
+                  'user_image', response.data["sub"]["user_image"].toString());
 
-              print(response.data["token"]);
-              print("token {$token}");
-
-              // showSuccessToast(
-              //     context, "Login", "You were logged successfully.");
               Navigator.push(
                   context,
                   MaterialPageRoute(

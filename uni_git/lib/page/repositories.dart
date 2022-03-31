@@ -6,7 +6,7 @@ class RepositoriesPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         drawer: NavigationDrawerWidget(),
         appBar: AppBar(
-          title: Text('Repositories'),
+          title: const Text('Repositories'),
           centerTitle: true,
           backgroundColor: Colors.red,
         ),

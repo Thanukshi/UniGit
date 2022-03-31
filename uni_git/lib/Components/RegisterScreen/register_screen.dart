@@ -272,11 +272,11 @@ class InitState extends State<RegisterScreen> {
             final prefs = await SharedPreferences.getInstance();
             await prefs.setString('token', response.data["token"].toString());
             await prefs.setString(
-                'user_id', response.data["sub"]["user_id"].toString());
-            await prefs.setString(
                 'user_email', response.data["sub"]["user_email"].toString());
             await prefs.setString(
                 'user_name', response.data["sub"]["user_name"].toString());
+            await prefs.setString(
+                'user_image', response.data["sub"]["user_image"].toString());
             // final String? token = prefs.getString('token');
             var userEmail = prefs.getString('user_email');
             print("user_Email : $userEmail");

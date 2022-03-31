@@ -38,6 +38,8 @@ dependencies:
   shared_preferences: ^2.0.13
   motion_toast: ^2.1.2
   provider: ^6.0.2
+  antdesign_icons: ^0.0.3  
+  flutter_vector_icons: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +79,19 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: AquinoDemo
+  
+      fonts:
+        - asset: assets/fonts/AquinoDemo.ttf
+
+    - family: Nisebuschgardens
+      fonts:
+        - asset: assets/fonts/Nisebuschgardens.ttf
+
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/NunitoBold.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
