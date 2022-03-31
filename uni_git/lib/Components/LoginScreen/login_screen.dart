@@ -241,16 +241,16 @@ class InitState extends State<LoginScreen> {
     );
   }
 
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-        value: item,
-        child: Text(
-          item,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ),
-      );
+  // DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+  //       value: item,
+  //       child: Text(
+  //         item,
+  //         style: const TextStyle(
+  //           fontWeight: FontWeight.bold,
+  //           fontSize: 18,
+  //         ),
+  //       ),
+  //     );
 
   void loginUser(String email, String password) async {
     if (email == "" || email == Null) {

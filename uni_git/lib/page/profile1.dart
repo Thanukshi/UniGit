@@ -1,54 +1,8 @@
-// ignore_for_file: file_names
-
-import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uni_git/Components/Common/common.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
-
-  @override
-  State<ProfilePage> createState() => InitState();
-}
-
-class InitState extends State<ProfilePage> {
-  var userName, userEmail, userImage;
-
-  @override
-  void initState() {
-    // ignore: todo
-    // TODO: implement initState
-    super.initState();
-    getUserDetails();
-    getUserDetailsByID();
-  }
-
-  void getUserDetailsByID() async {
-    try {
-      var response = await Dio()
-          .get(CommonService.URL + "/user/user/62445ea86bacd1f24e1b1fa2");
-      print(response);
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  getUserDetails() async {
-    final prefs = await SharedPreferences.getInstance();
-    final String? name = prefs.getString('user_name');
-    final String? email = prefs.getString('user_email');
-    final String? image = prefs.getString('user_image');
-    userName = name;
-    userEmail = email;
-    userImage = image;
-
-    print("im " + userImage);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,23 +81,12 @@ class InitState extends State<ProfilePage> {
                                     const SizedBox(
                                       height: 80,
                                     ),
-                                    Text(
-                                      "$userName",
-                                      style: const TextStyle(
+                                    const Text(
+                                      'Jhone Doe',
+                                      style: TextStyle(
                                         color: Color.fromRGBO(39, 105, 171, 1),
                                         fontFamily: 'Nunito',
-                                        fontSize: 32,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      "$userEmail",
-                                      style: const TextStyle(
-                                        color: Color.fromRGBO(39, 105, 171, 1),
-                                        fontFamily: 'Nunito',
-                                        fontSize: 20,
+                                        fontSize: 37,
                                       ),
                                     ),
                                     const SizedBox(
@@ -208,13 +151,10 @@ class InitState extends State<ProfilePage> {
                                                 fontSize: 25,
                                               ),
                                             ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
                                           ],
                                         ),
                                       ],
-                                    ),
+                                    )
                                   ],
                                 ),
                               ),
@@ -240,9 +180,10 @@ class InitState extends State<ProfilePage> {
                                   //   fit: BoxFit.fitWidth,
                                   // ),
                                   child: const CircleAvatar(
-                                      radius: 85, // Image radius
-                                      backgroundImage: NetworkImage(
-                                          "https://res.cloudinary.com/dpblmx9fn/image/upload/v1648647409/UserList/umby5f7fsocvylcxwc9e.jpg")),
+                                    radius: 85, // Image radius
+                                    backgroundImage: NetworkImage(
+                                        'https://res.cloudinary.com/dpblmx9fn/image/upload/v1648647409/UserList/umby5f7fsocvylcxwc9e.jpg'),
+                                  ),
                                 ),
                               ),
                             ),
@@ -310,6 +251,6 @@ class InitState extends State<ProfilePage> {
         )
       ],
     );
+  
   }
 }
-
