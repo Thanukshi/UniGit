@@ -5,7 +5,9 @@ import 'package:uni_git/model/navigation_item.dart';
 import 'package:uni_git/provider/navigation_provider.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
-  static final padding = EdgeInsets.symmetric(horizontal: 15);
+  static const padding = EdgeInsets.symmetric(horizontal: 15);
+
+  const NavigationDrawerWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -49,6 +51,13 @@ class NavigationDrawerWidget extends StatelessWidget {
                       item: NavigationItem.repositories,
                       text: 'Repositories',
                       icon: Icons.list,
+                    ),
+                    const SizedBox(height: 10),
+                    buildMenuItem(
+                      context,
+                      item: NavigationItem.users,
+                      text: 'Users',
+                      icon: Icons.people,
                     ),
                     const SizedBox(height: 10),
                     buildMenuItem(

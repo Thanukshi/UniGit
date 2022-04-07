@@ -3,6 +3,7 @@ enum NavigationItem {
   newRepo,
   repositories,
   favourites,
+  users,
   followers,
   profile,
   settings,

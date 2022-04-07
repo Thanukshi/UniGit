@@ -241,17 +241,6 @@ class InitState extends State<LoginScreen> {
     );
   }
 
-  // DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-  //       value: item,
-  //       child: Text(
-  //         item,
-  //         style: const TextStyle(
-  //           fontWeight: FontWeight.bold,
-  //           fontSize: 18,
-  //         ),
-  //       ),
-  //     );
-
   void loginUser(String email, String password) async {
     if (email == "" || email == Null) {
       showErrorToast(
@@ -284,6 +273,8 @@ class InitState extends State<LoginScreen> {
                   context, "Password Error", response.data["msg"].toString());
             } else if (response.data["code"] == 202) {
               await prefs.setString('token', response.data["token"].toString());
+              await prefs.setString(
+                  'id', response.data["sub"]["_id"].toString());
               await prefs.setString(
                   'user_email', response.data["sub"]["user_email"].toString());
               await prefs.setString(

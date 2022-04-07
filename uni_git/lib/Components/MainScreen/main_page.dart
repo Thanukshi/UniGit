@@ -5,14 +5,17 @@ import 'package:uni_git/page/favourites_page.dart';
 import 'package:uni_git/page/followers.dart';
 import 'package:uni_git/page/home.dart';
 import 'package:uni_git/page/notifications_page.dart';
-import 'package:uni_git/page/people_page.dart';
+import 'package:uni_git/page/new_repo.dart';
 import 'package:uni_git/page/plugins_page.dart';
 import 'package:uni_git/page/repositories.dart';
 import 'package:uni_git/page/updates_page.dart';
 import 'package:uni_git/page/profile.dart';
+import 'package:uni_git/page/users_page.dart';
 import 'package:uni_git/provider/navigation_provider.dart';
 
 class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
+
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -29,17 +32,19 @@ class _MainPageState extends State<MainPage> {
       case NavigationItem.home:
         return HomePage();
       case NavigationItem.newRepo:
-        return PeoplePage();
+        return const NewRepository();
       case NavigationItem.repositories:
         return RepositoriesPage();
+      case NavigationItem.users:
+        return UsersPage();
       case NavigationItem.followers:
-        return FollowersPage();
+        return const FollowersPage();
       case NavigationItem.favourites:
         return FavouritesPage();
       case NavigationItem.profile:
-        return ProfilePage();
+        return const ProfilePage();
       case NavigationItem.settings:
-        return UpdatesPage();
+        return const UpdatesPage();
       case NavigationItem.plugins:
         return PluginsPage();
       case NavigationItem.notifications:

@@ -261,6 +261,39 @@ exports.getUserDetailsByID = async function (req, res, next) {
   }
 };
 
+exports.geAllUserDetails = async function (req, res, next) {
+  try {
+    if (req.params && req.params.id) {
+      const userDetails = await User.find();
+
+      var filtered = userDetails.filter(function (el) {
+        return el._id != req.params.id;
+      });
+
+      res.status(200).json({
+        code: 200,
+        success: true,
+        status: "Success",
+        UserDetails: filtered,
+      });
+    } else {
+      res.status(200).json({
+        code: 200,
+        success: false,
+        status: "Unsuccess",
+        message: "Id is not availble",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      code: 500,
+      success: false,
+      status: "Internal Server Error",
+      message: error.message,
+    });
+  }
+};
+
 function validateEmail(email) {
   const re =
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

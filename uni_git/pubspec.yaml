@@ -41,6 +41,11 @@ dependencies:
   antdesign_icons: ^0.0.3  
   flutter_vector_icons: ^1.0.0
   image_picker: ^0.8.4+11
+  form_bloc: ^0.30.0
+  flutter_form_bloc: ^0.30.1
+  flutter_bloc: ^8.0.1
+  flutter_slidable: ^1.2.0
+  http: ^0.13.4
   
 dev_dependencies:
   flutter_test:
