@@ -98,61 +98,6 @@ class _UsersPageState extends State<UsersPage> {
         });
   }
 
-//   Widget getCard() {
-//     return Card(
-//       child: ListTile(
-//         title: Row(
-//           children: <Widget>[
-//             Container(
-//               width: 60,
-//               height: 60,
-//               decoration: const BoxDecoration(
-//                   color: Colors.blueGrey,
-//                   borderRadius: BorderRadius.circular(60 / 2),
-//                   image: DecorationImage(
-//                       fit: BoxFit.cover, image: NetworkImage(profileUrl))),
-//             ),
-//             const SizedBox(width: 30),
-//             Container(
-//               child: const Text(
-//                 "HI",
-//                 textAlign: TextAlign.left,
-//               ),
-//             ),
-//             const SizedBox(width: 160),
-//             Container(
-//               width: 20,
-//               height: 20,
-//               child: const Icon(
-//                 Icons.cancel_sharp,
-//                 color: Color(0xFF276955),
-//               ),
-//             ),
-//             const SizedBox(width: 10),
-//             Container(
-//               width: 20,
-//               height: 20,
-//               child: const Icon(
-//                 Icons.add_circle_outlined,
-//                 color: Color(0xFF276955),
-//               ),
-//             ),
-//             const SizedBox(width: 10),
-//             Container(
-//               width: 20,
-//               height: 20,
-//               child: const Icon(
-//                 Icons.cancel_sharp,
-//                 color: Colors.redAccent,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
   Widget getCard(item) {
     var fullName = item['user_name'];
     var email = item['user_email'];

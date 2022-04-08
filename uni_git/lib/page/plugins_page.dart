@@ -4,11 +4,18 @@ import 'package:uni_git/widget/navigation_drawer_widget.dart';
 class PluginsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
-        drawer: NavigationDrawerWidget(),
+        drawer: const NavigationDrawerWidget(),
         appBar: AppBar(
-          title: Text('Plugin'),
+          title: const Text(
+            'Plugin',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30,
+              fontFamily: 'Nisebuschgardens',
+            ),
+          ),
           centerTitle: true,
-          backgroundColor: Colors.red,
+          backgroundColor: const Color(0xFF41A58D),
         ),
       );
 }

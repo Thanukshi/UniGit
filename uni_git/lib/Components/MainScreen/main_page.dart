@@ -30,13 +30,13 @@ class _MainPageState extends State<MainPage> {
 
     switch (navigationItem) {
       case NavigationItem.home:
-        return HomePage();
+        return const HomePage();
       case NavigationItem.newRepo:
         return const NewRepository();
       case NavigationItem.repositories:
         return RepositoriesPage();
       case NavigationItem.users:
-        return UsersPage();
+        return const UsersPage();
       case NavigationItem.followers:
         return const FollowersPage();
       case NavigationItem.favourites:

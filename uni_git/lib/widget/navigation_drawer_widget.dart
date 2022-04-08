@@ -1,13 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_git/data/user.dart';
 import 'package:uni_git/model/navigation_item.dart';
 import 'package:uni_git/provider/navigation_provider.dart';
 
-class NavigationDrawerWidget extends StatelessWidget {
+class NavigationDrawerWidget extends StatefulWidget {
+  const NavigationDrawerWidget({Key? key}) : super(key: key);
+
+  @override
+  State<NavigationDrawerWidget> createState() => InitState();
+}
+
+class InitState extends State<NavigationDrawerWidget> {
+  var userName, userEmail, userImage;
   static const padding = EdgeInsets.symmetric(horizontal: 15);
 
-  const NavigationDrawerWidget({Key? key}) : super(key: key);
+  @override
+  void initState() {
+    // ignore: todo
+    // TODO: implement initState
+    super.initState();
+
+    getUserName().then((user_name) {
+      setState(() {
+        userName = user_name;
+      });
+    });
+    getUserEmail().then((user_email) {
+      setState(() {
+        userEmail = user_email;
+      });
+    });
+    getUserImage().then((user_image) {
+      setState(() {
+        userImage = user_image;
+      });
+    });
+  }
+
+  getUserName() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? name = prefs.getString('user_name');
+
+    var userName = name;
+
+    return userName;
+  }
+
+  getUserEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? email = prefs.getString('user_email');
+
+    var userEmail = email;
+
+    return userEmail;
+  }
+
+  getUserImage() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? image = prefs.getString('user_image');
+
+    String userImage = image.toString();
+
+    return userImage;
+  }
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -24,9 +81,9 @@ class NavigationDrawerWidget extends StatelessWidget {
             children: <Widget>[
               buildHeader(
                 context,
-                urlImage: urlImage,
-                name: name,
-                email: email,
+                urlImage: userImage,
+                name: userName,
+                email: userEmail,
               ),
               Container(
                 padding: padding,

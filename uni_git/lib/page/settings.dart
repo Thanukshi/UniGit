@@ -8,7 +8,14 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         drawer: const NavigationDrawerWidget(),
         appBar: AppBar(
-          title: const Text('Settings'),
+          title: const Text(
+            'Settings',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30,
+              fontFamily: 'Nisebuschgardens',
+            ),
+          ),
           centerTitle: true,
           backgroundColor: const Color(0xFF41A58D),
         ),
