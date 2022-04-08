@@ -8,7 +8,7 @@ import 'package:uni_git/page/notifications_page.dart';
 import 'package:uni_git/page/new_repo.dart';
 import 'package:uni_git/page/plugins_page.dart';
 import 'package:uni_git/page/repositories.dart';
-import 'package:uni_git/page/updates_page.dart';
+import 'package:uni_git/page/settings.dart';
 import 'package:uni_git/page/profile.dart';
 import 'package:uni_git/page/users_page.dart';
 import 'package:uni_git/provider/navigation_provider.dart';
@@ -44,7 +44,7 @@ class _MainPageState extends State<MainPage> {
       case NavigationItem.profile:
         return const ProfilePage();
       case NavigationItem.settings:
-        return const UpdatesPage();
+        return const SettingsPage();
       case NavigationItem.plugins:
         return PluginsPage();
       case NavigationItem.notifications:

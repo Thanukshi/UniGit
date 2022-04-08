@@ -11,21 +11,21 @@ exports.registerUser = async function (req, res, next) {
     if (!user_email) {
       return res.status(200).json({
         code: 204,
-        status: "No Content",
+        status: "No Content of Email",
         Success: false,
         message: "Please enter a your email.",
       });
     } else if (!user_name) {
       return res.status(200).json({
         code: 204,
-        status: "No Content",
+        status: "No Content of Username",
         Success: false,
         message: "Please enter a your user name.",
       });
     } else if (!user_password) {
       return res.status(200).json({
         code: 204,
-        status: "No Content",
+        status: "No Content of Password",
         Success: false,
         message: "Please enter a your password.",
       });
@@ -40,7 +40,7 @@ exports.registerUser = async function (req, res, next) {
       return res.status(200).json({
         code: 406,
         success: false,
-        status: "Not Acceptable",
+        status: "Not Acceptable Password",
         message:
           "Password has 8 characters, It must have one uppercase letter, lowercase letter, number and special character.",
       });
@@ -48,7 +48,7 @@ exports.registerUser = async function (req, res, next) {
       return res.status(200).json({
         code: 406,
         success: false,
-        status: "Not Acceptable",
+        status: "Not Acceptable Confirm Password",
         message:
           "Confirm Password does not match with the password. Please check again.",
       });

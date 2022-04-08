@@ -22,9 +22,9 @@ class OnboardScreenTwo extends StatelessWidget {
                 padding: EdgeInsets.all(20.0),
               ),
               Image(
-                image: const AssetImage("assets/images/shell_back.png"),
-                width: size.width,
-                height: size.height * 0.5,
+                image: const AssetImage("assets/images/gitt.png"),
+                width: 375,
+                height: size.height * 0.45,
                 fit: BoxFit.cover,
               ),
               ClipPath(
@@ -47,7 +47,7 @@ class OnboardScreenTwo extends StatelessWidget {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   const Text(
-                    "EASY TO FIND",
+                    "EASY TO HANDLE",
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,

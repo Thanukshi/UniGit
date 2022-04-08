@@ -22,7 +22,7 @@ class OnboardScreenOne extends StatelessWidget {
                 padding: EdgeInsets.all(20.0),
               ),
               Image(
-                image: const AssetImage("assets/images/lib_back.png"),
+                image: const AssetImage("assets/images/Octocat.png"),
                 width: size.width,
                 height: size.height * 0.5,
                 fit: BoxFit.cover,
@@ -47,7 +47,7 @@ class OnboardScreenOne extends StatelessWidget {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   const Text(
-                    "DIGITAL LIBRARY",
+                    "UNI GIT",
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -177,4 +177,3 @@ class OnboardScreenOne extends StatelessWidget {
     );
   }
 }
-

@@ -21,9 +21,9 @@ class OnboardScreenThree extends StatelessWidget {
                 padding: EdgeInsets.all(20.0),
               ),
               Image(
-                image: const AssetImage("assets/images/book_back.png"),
-                width: size.width,
-                height: size.height * 0.5,
+                image: const AssetImage("assets/images/gits.png"),
+                width: 300,
+                height: size.height * 0.25,
                 fit: BoxFit.cover,
               ),
               ClipPath(
@@ -46,7 +46,7 @@ class OnboardScreenThree extends StatelessWidget {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   const Text(
-                    "FREEDOM",
+                    "FREEDOM EXPLORE",
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,

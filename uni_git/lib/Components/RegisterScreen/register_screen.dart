@@ -24,6 +24,7 @@ class InitState extends State<RegisterScreen> {
     String userEmail = '';
     String username = '';
     String userPass = '';
+    String userConPass = '';
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -54,7 +55,7 @@ class InitState extends State<RegisterScreen> {
                       width: 180,
                     ),
                     Container(
-                      margin: const EdgeInsets.only(right: 20, top: 20),
+                      margin: const EdgeInsets.only(right: 20, top: 10),
                       alignment: Alignment.bottomRight,
                       child: const Text(
                         "Register",
@@ -69,7 +70,7 @@ class InitState extends State<RegisterScreen> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: 20, right: 20, top: 50),
+              margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
               padding: const EdgeInsets.only(left: 20, right: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
@@ -156,9 +157,39 @@ class InitState extends State<RegisterScreen> {
                 },
               ),
             ),
+            Container(
+              margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.grey[200],
+                boxShadow: const [
+                  BoxShadow(
+                      offset: Offset(0, 10),
+                      blurRadius: 50,
+                      color: Color(0xffEEEEEE))
+                ],
+              ),
+              alignment: Alignment.center,
+              child: TextField(
+                obscureText: true,
+                cursorColor: const Color(0xFF276955),
+                decoration: const InputDecoration(
+                    icon: Icon(
+                      Icons.vpn_key,
+                      color: Color(0xFF276955),
+                    ),
+                    hintText: "Enter your confirm password",
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none),
+                onChanged: (value) {
+                  userConPass = value;
+                },
+              ),
+            ),
             GestureDetector(
               onTap: () =>
-                  {registerUser(userId, userEmail, username, userPass)},
+                  {registerUser(userEmail, username, userPass, userConPass)},
               // {registerUser(userEmail, username, userPhone, userPass)},
               child: Container(
                 margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
@@ -223,13 +254,11 @@ class InitState extends State<RegisterScreen> {
     );
   }
 
-  void registerUser(
-      String id, String email, String username, String password) async {
+  void registerUser(String email, String username, String password,
+      String conPassword) async {
     // ignore: unrelated_type_equality_checks
-    if (id == "" || id == Null) {
-      showErrorToast(context, "Student ID Error",
-          "Student id can no be empty. Please Enter Student id.");
-    } else if (email == "" || email == Null) {
+
+    if (email == "" || email == Null) {
       showErrorToast(
           context, "Email Error", "Email can no be empty. Please Enter Email.");
     } else if (username == "" || username == Null) {
@@ -238,6 +267,9 @@ class InitState extends State<RegisterScreen> {
     } else if (password == "" || password == Null) {
       showErrorToast(context, "Password Error",
           "Password can no be empty. Please Enter Password.");
+    } else if (conPassword == "" || conPassword == Null) {
+      showErrorToast(context, "Password Error",
+          "Confirm Password can no be empty. Please Enter Password.");
     } else if (!isEmail(email)) {
       showErrorToast(context, "Email Error",
           "This email address is invalid. Please enter a valid email address.");
@@ -251,26 +283,43 @@ class InitState extends State<RegisterScreen> {
       try {
         var response =
             await Dio().post(CommonService.URL + "/user/register", data: {
-          "user_id": id,
           "user_email": email,
           "user_name": username,
-          "user_password": password
+          "user_password": password,
+          "user_cPassword": conPassword
         });
         // ignore: avoid_print
         print("datasss" + response.data.toString());
 
         if (response.statusCode == 200) {
-          if (response.data["code"] == 208 &&
-              response.data["status"] == "Student ID is Already Reported") {
-            showErrorToast(context, "Student ID Error",
+          if (response.data["code"] == 406 &&
+              response.data["status"] == "Not Acceptable") {
+            showErrorToast(context, "Email Address Error",
+                response.data["message"].toString());
+          } else if (response.data["code"] == 406 &&
+              response.data["status"] == "Not Acceptable Password") {
+            showErrorToast(
+                context, "Password Error", response.data["message"].toString());
+          } else if (response.data["code"] == 406 &&
+              response.data["status"] == "Not Acceptable Confirm Password") {
+            showErrorToast(context, "Confirm Password Error",
                 response.data["message"].toString());
           } else if (response.data["code"] == 208 &&
               response.data["status"] == "Email is Already Reported") {
             showErrorToast(context, "Email Address Error",
                 response.data["message"].toString());
+          } else if (response.data["code"] == 208 &&
+              response.data["status"] == "User Name is Already Reported") {
+            showErrorToast(context, response.data["message"].toString(),
+                response.data["message"].toString());
+          } else if (response.data["code"] == 208 &&
+              response.data["status"] == "Already Reporte") {
+            showErrorToast(context, "User Name  and Email are Already Reported",
+                response.data["message"].toString());
           } else {
             final prefs = await SharedPreferences.getInstance();
             await prefs.setString('token', response.data["token"].toString());
+            await prefs.setString('id', response.data["sub"]["id"].toString());
             await prefs.setString(
                 'user_email', response.data["sub"]["user_email"].toString());
             await prefs.setString(
@@ -284,7 +333,7 @@ class InitState extends State<RegisterScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MainPage(),
+                  builder: (context) => const MainPage(),
                 ));
           }
         }

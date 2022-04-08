@@ -68,45 +68,6 @@ class InitState extends State<LoginScreen> {
                 ),
               ),
             ),
-            // Container(
-            //   width: 600,
-            //   margin: const EdgeInsets.only(
-            //       top: 40, left: 20, bottom: 5, right: 20),
-            //   padding: const EdgeInsets.symmetric(
-            //     horizontal: 40,
-            //     vertical: 2,
-            //   ),
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(12.0),
-            //     border: Border.all(
-            //       color: const Color(0xFF276955),
-            //       width: 4,
-            //     ),
-            //   ),
-            //   child: DropdownButtonHideUnderline(
-            //     child: DropdownButton<String>(
-            //       hint: const Text(
-            //         "Select User Type",
-            //         style: TextStyle(
-            //           fontSize: 18,
-            //           fontWeight: FontWeight.bold,
-            //           color: Colors.black,
-            //         ),
-            //       ),
-            //       value: userValue,
-            //       iconSize: 36,
-            //       icon: const Icon(
-            //         Icons.arrow_drop_down,
-            //         color: Color(0xFF276955),
-            //       ),
-            //       items: userTypes.map(buildMenuItem).toList(),
-            //       onChanged: (value) => setState(
-            //         () => userValue = value,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-
             Container(
               margin: const EdgeInsets.only(left: 20, right: 20, top: 50),
               padding: const EdgeInsets.only(left: 20, right: 20),
@@ -274,7 +235,7 @@ class InitState extends State<LoginScreen> {
             } else if (response.data["code"] == 202) {
               await prefs.setString('token', response.data["token"].toString());
               await prefs.setString(
-                  'id', response.data["sub"]["_id"].toString());
+                  'id', response.data["sub"]["id"].toString());
               await prefs.setString(
                   'user_email', response.data["sub"]["user_email"].toString());
               await prefs.setString(
@@ -285,7 +246,7 @@ class InitState extends State<LoginScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MainPage(),
+                    builder: (context) => const MainPage(),
                   ));
             } else {
               showErrorToast(context, "Error", "1Something went wrong...");
